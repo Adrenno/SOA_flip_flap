@@ -6,13 +6,19 @@ module TsvBuddy
   # arguments: tsv - a String in TSV format
   # returns: nothing
   def take_tsv(tsv)
-
+    tsv_data = tsv.split("\n").map { |line| line.split("\t") }
+    keys = tsv_data.shift #the first lines are the keys
+    @data = tsv_data.map do |row|
+      keys.zip(row).to_h
+    end
   end
 
-  # Converts @data into tsv string
+  # Converts @data into a tsv string
   # arguments: none
   # returns: String in TSV format
   def to_tsv
-
+    headers = @data.first.keys.join("\t") + "\n"
+    rows = @data.map { |row| row.values.join("\t") }.join("\n")
+    headers + rows + "\n"
   end
 end
