@@ -5,6 +5,7 @@ module TsvBuddy
   # Converts a String with TSV data into internal data structure @data
   # arguments: tsv - a String in TSV format
   # returns: nothing
+  
   def take_tsv(tsv)
     tsv_data = tsv.split("\n").map { |line| line.split("\t") }
     keys = tsv_data.shift #the first lines are the keys
